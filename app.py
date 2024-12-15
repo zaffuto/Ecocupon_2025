@@ -13,16 +13,20 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configuración de la base de datos
-DATABASE_URL = os.getenv('cupon_POSTGRES_URL')
+DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
         'connect_args': {
-            'sslmode': 'require'
+            'sslmode': os.getenv('SSL_MODE', 'require')
         }
     }
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cupones.db'
+
+# Configuración de la aplicación
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
+app.debug = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
 
 db = SQLAlchemy(app)
 
@@ -106,8 +110,6 @@ def generar_qr():
         return jsonify({'error': 'Error interno del servidor'}), 500
 
 # For Vercel serverless deployment
-app.debug = True
-
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)

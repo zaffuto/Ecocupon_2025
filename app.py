@@ -13,8 +13,12 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configuración de la base de datos
-DATABASE_URL = os.getenv('DATABASE_URL')
+DATABASE_URL = os.getenv('DATABASE_URL', os.getenv('cupon_POSTGRES_URL'))  # Intentar ambos nombres de variables
 if DATABASE_URL:
+    # Asegurarse de que la URL comience con postgresql://
+    if DATABASE_URL.startswith('postgres://'):
+        DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+    
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
         'connect_args': {
@@ -25,8 +29,8 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cupones.db'
 
 # Configuración de la aplicación
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default-secret-key')
-app.debug = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', os.getenv('cupon_SUPABASE_JWT_SECRET', 'default-secret-key'))
+app.debug = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
 
 db = SQLAlchemy(app)
 

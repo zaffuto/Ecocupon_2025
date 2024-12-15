@@ -4,9 +4,17 @@ from io import BytesIO
 import base64
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cupones.db'
+
+# Use SQLite for development and PostgreSQL for production
+if os.environ.get('VERCEL_ENV') == 'production':
+    # For Vercel, we'll use a temporary SQLite database
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tmp/cupones.db'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cupones.db'
+
 db = SQLAlchemy(app)
 
 class Cupon(db.Model):
@@ -14,8 +22,12 @@ class Cupon(db.Model):
     contenido = db.Column(db.String(200), nullable=False)
     fecha_creacion = db.Column(db.DateTime, default=datetime.utcnow)
 
+# Create tables in a context
 with app.app_context():
-    db.create_all()
+    try:
+        db.create_all()
+    except Exception as e:
+        print(f"Database initialization error: {e}")
 
 @app.route('/')
 def index():
@@ -46,15 +58,21 @@ def generar_qr():
     # Convertir a base64
     img_str = base64.b64encode(img_io.getvalue()).decode()
 
-    # Guardar en la base de datos
-    nuevo_cupon = Cupon(contenido=data)
-    db.session.add(nuevo_cupon)
-    db.session.commit()
+    try:
+        # Guardar en la base de datos
+        nuevo_cupon = Cupon(contenido=data)
+        db.session.add(nuevo_cupon)
+        db.session.commit()
+    except Exception as e:
+        print(f"Database error: {e}")
 
     return jsonify({
         'qr_code': img_str,
         'mensaje': 'QR generado exitosamente'
     })
 
+# For Vercel serverless deployment
+app.debug = True
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))

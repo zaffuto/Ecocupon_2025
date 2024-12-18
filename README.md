@@ -1,38 +1,79 @@
-[![Building Next.js Ecommerce Store with TypeScript, Tailwindcss, headlessui, and Shopify CMS.](https://img.youtube.com/vi/fJxzVFXGT_E/0.jpg)](https://www.youtube.com/watch?v=fJxzVFXGT_E)
+# EcoCupon
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Plataforma de generación de cupones de descuento por reciclaje según la ley REP.
 
-## Getting Started
+## Tecnologías
 
-First, run the development server:
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- QR Code Generator
 
+## Requisitos
+
+- Node.js 18+
+- npm o yarn
+
+## Instalación
+
+1. Clonar el repositorio:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/tu-usuario/ecocupon.git
+cd ecocupon
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instalar dependencias:
+```bash
+npm install
+# o
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Configurar variables de entorno:
+```bash
+cp .env.example .env.local
+```
+Editar `.env.local` con tus configuraciones.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Iniciar el servidor de desarrollo:
+```bash
+npm run dev
+# o
+yarn dev
+```
 
-## Learn More
+## Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  ├── app/              # Rutas y páginas de Next.js
+  ├── components/       # Componentes React reutilizables
+  ├── lib/             # Utilidades y funciones auxiliares
+  └── types/           # Definiciones de tipos TypeScript
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Características
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Generación de QR para descuentos
+- Integración con WhatsApp para comunicación
+- Diseño responsivo y moderno
+- Optimizado para SEO
 
-## Deploy on Vercel
+## Seguridad
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Headers de seguridad configurados
+- Sanitización de entradas
+- Variables de entorno protegidas
+- TypeScript strict mode
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contribuir
+
+1. Fork el proyecto
+2. Crear una rama feature (`git checkout -b feature/nueva-caracteristica`)
+3. Commit los cambios (`git commit -m 'feat: Agregar nueva caracteristica'`)
+4. Push a la rama (`git push origin feature/nueva-caracteristica`)
+5. Crear un Pull Request
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.

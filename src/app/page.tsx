@@ -1,39 +1,26 @@
-import QRGenerator from '@/components/discount/qr-generator';
-import Grid from '@/components/grid';
-import { defaultSort, sorting } from 'lib/constants';
-import { getProducts } from 'lib/shopify';
 import Link from 'next/link';
+import DemoQR from '@/components/demo-qr';
 
-export const runtime = 'edge';
-
-export default async function HomePage() {
+export default function HomePage() {
   return (
-    <>
+    <main className="min-h-screen">
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-green-50 to-green-100 py-20">
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
-              EcoCupon.cl
+              EcoCupon
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Convierte tus acciones ecológicas en descuentos reales. 
               Recicla según la ley REP y obtén beneficios inmediatos.
             </p>
-            <div className="flex justify-center gap-4">
-              <Link 
-                href="https://wa.me/56979540471?text=Hola,%20me%20interesa%20una%20demo%20de%20EcoCupon"
-                className="bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition"
-              >
-                Solicitar Demo
-              </Link>
-              <Link 
-                href="/descuentos"
-                className="border border-green-500 text-green-500 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition"
-              >
-                Ver Descuentos
-              </Link>
-            </div>
+            <Link 
+              href="https://wa.me/56979540471?text=Hola,%20me%20interesa%20saber%20más%20sobre%20EcoCupon"
+              className="inline-block bg-green-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-600 transition"
+            >
+              Solicitar Demo
+            </Link>
           </div>
         </div>
       </section>
@@ -68,20 +55,22 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Integration Section */}
+      {/* Demo QR Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Integrado con</h2>
-          <div className="flex justify-center items-center gap-8 flex-wrap">
-            <div className="bg-white p-4 rounded-lg shadow-sm">
-              <img src="/autoventa-logo.png" alt="Autoventa.io" className="h-12" />
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm">
-              <QRGenerator phoneNumber="+56979540471" message="descuento" />
-            </div>
-          </div>
+          <h2 className="text-3xl font-bold mb-8">Prueba un Descuento Demo</h2>
+          <DemoQR />
         </div>
       </section>
-    </>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-gray-400">
+            {new Date().getFullYear()} EcoCupon. Todos los derechos reservados.
+          </p>
+        </div>
+      </footer>
+    </main>
   );
 }

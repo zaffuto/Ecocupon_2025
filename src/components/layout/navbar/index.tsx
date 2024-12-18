@@ -1,44 +1,37 @@
-import Link from 'next/link';
-import { Suspense } from 'react';
-import MobileMenu from './mobile-menu';
-import Search from './search';
+import Link from "next/link";
+import LogoIcon from "../../icons/logo";
+import MobileMenu from "./mobile-menu";
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-neutral-200">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-1 flex items-center justify-start">
-            <Link href="/" className="font-display text-2xl text-primary hover:text-accent transition-colors">
+    <nav className="relative flex items-center justify-between p-4 lg:px-6">
+      <div className="block flex-none md:hidden">
+        <MobileMenu title="EcoCupon" />
+      </div>
+      <div className="flex w-full items-center">
+        <div className="flex w-full md:w-1/3">
+          <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
+            <LogoIcon className="h-8 flex-none" />
+            <div className="ml-2 flex-none text-sm font-medium uppercase md:hidden lg:block">
               EcoCupon
-            </Link>
-          </div>
-
-          <div className="hidden md:flex items-center justify-center flex-1 space-x-8">
-            <Link href="/products" className="text-neutral-600 hover:text-accent transition-colors">
-              Productos
-            </Link>
-            <Link href="/about" className="text-neutral-600 hover:text-accent transition-colors">
-              Nosotros
-            </Link>
-            <Link href="/contact" className="text-neutral-600 hover:text-accent transition-colors">
-              Contacto
-            </Link>
-          </div>
-
-          <div className="flex-1 flex items-center justify-end space-x-4">
-            <Suspense fallback={<div className="w-10 h-10" />}>
-              <Search />
-            </Suspense>
-            <div className="flex md:hidden">
-              <MobileMenu menu={[
-                { title: 'Inicio', path: '/' },
-                { title: 'Productos', path: '/products' },
-                { title: 'Acerca', path: '/about' },
-                { title: 'Contacto', path: '/contact' }
-              ]} />
             </div>
-          </div>
+          </Link>
+        </div>
+        <div className="hidden justify-center md:flex md:w-1/3">
+          <Link href="/" className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6">
+            <LogoIcon className="h-8 flex-none" />
+            <div className="ml-2 flex-none text-sm font-medium uppercase">
+              EcoCupon
+            </div>
+          </Link>
+        </div>
+        <div className="flex justify-end md:w-1/3">
+          <Link
+            href="/solicitar-demo"
+            className="rounded-full bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+          >
+            Solicitar Demo
+          </Link>
         </div>
       </div>
     </nav>

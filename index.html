@@ -1,152 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCupon.cl - Tu Plataforma de Descuentos Ecológicos para Shopify</title>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
-    <style>
-        :root {
-            --primary-color: #2ecc71;
-            --secondary-color: #27ae60;
-            --accent-color: #e74c3c;
-            --text-color: #2c3e50;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: var(--text-color);
-        }
-
-        .header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .discount-card {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin: 20px auto;
-            width: 340px;
-            height: 189px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .food-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 10px;
-            object-fit: cover;
-        }
-
-        .demo-button {
-            display: inline-block;
-            background-color: #25D366;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 2rem 0;
-            transition: transform 0.2s;
-        }
-
-        .demo-button:hover {
-            transform: scale(1.05);
-        }
-
-        .discount-text {
-            font-size: 24px;
-            color: var(--accent-color);
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .shopify-badge {
-            background-color: #5E6EBF;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin: 1rem 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="header">
-        <h1>EcoCupon.cl</h1>
-        <p>La plataforma de descuentos ecológicos para tu tienda Shopify</p>
-        <div class="shopify-badge">Compatible con Shopify</div>
-    </div>
-
-    <div class="container">
-        <div class="features">
-            <div class="feature-card">
-                <h3>🌱 Descuentos Ecológicos</h3>
-                <p>Convierte tus acciones ecológicas en descuentos reales. Recicla productos según la ley REP y obtén beneficios inmediatos.</p>
-            </div>
-            <div class="feature-card">
-                <h3>📱 Fácil de Usar</h3>
-                <p>Simplemente envía una foto del producto reciclable y recibe tu cupón de descuento instantáneamente vía QR.</p>
-            </div>
-            <div class="feature-card">
-                <h3>💰 Beneficios Reales</h3>
-                <p>Obtén hasta 40% de descuento en productos o convierte tus puntos en pasajes QR para transporte.</p>
-            </div>
-        </div>
-
-        <div class="discount-card">
-            <div>
-                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=150" alt="Comida Saludable" class="food-image">
-                <div class="discount-text">25% OFF</div>
-            </div>
-            <div class="qr-code" id="qrcode"></div>
-        </div>
-
-        <div style="text-align: center;">
-            <a href="https://wa.me/56979540471?text=Hola,%20me%20interesa%20una%20demo%20de%20EcoCupon" class="demo-button">
-                <i class="fab fa-whatsapp"></i> Solicitar Demo por WhatsApp
-            </a>
-        </div>
-    </div>
-
-    <script>
-        window.onload = function() {
-            var qr = qrcode(0, 'M');
-            qr.addData('https://wa.me/56979540471?text=descuento');
-            qr.make();
-            document.getElementById('qrcode').innerHTML = qr.createImgTag(4);
-        }
-    </script>
-</body>
+<html lang="es" class="h-full bg-gray-50">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/eco-qr.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Generador de cupones QR ecológicos - Crea códigos QR para cupones eco-amigables" />
+    <meta name="keywords" content="QR, cupones, ecológico, eco-friendly, generador QR" />
+    <meta property="og:title" content="Eco Cupon QR - Generador de Cupones Ecológicos" />
+    <meta property="og:description" content="Crea códigos QR para cupones eco-amigables de forma fácil y rápida" />
+    <meta property="og:image" content="https://smarterbot.cl/og-image.jpg" />
+    <meta property="og:url" content="https://smarterbot.cl" />
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <title>Eco Cupon QR - Generador de Cupones Ecológicos</title>
+  </head>
+  <body class="h-full">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

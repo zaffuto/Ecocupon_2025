@@ -15,25 +15,31 @@ export default function QRGenerator() {
   };
 
   return (
-    <div className="text-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg inline-block">
-        <QRCodeSVG 
-          value={qrValue}
-          size={200}
-          level="H"
-          includeMargin
-          className="mx-auto"
-        />
-        <p className="mt-4 text-lg font-semibold text-gray-700">
-          Descuento actual: {discount}
-        </p>
-        <p className="mt-2 text-sm text-gray-500">
-          Escanea para recibir tu descuento
-        </p>
+    <div className="text-center animate-fade-in">
+      <div className="qr-container inline-block">
+        <div className="mb-6">
+          <QRCodeSVG 
+            value={qrValue}
+            size={250}
+            level="H"
+            includeMargin
+            className="mx-auto shadow-lg rounded-lg"
+          />
+        </div>
+        <div className="space-y-3">
+          <p className="text-2xl font-bold text-green-600">
+            Descuento actual: {discount}
+          </p>
+          <p className="text-gray-600">
+            Escanea para recibir tu descuento en WhatsApp
+          </p>
+        </div>
       </div>
       <button
         onClick={generateNewQR}
-        className="mt-6 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+        className="mt-8 px-8 py-4 bg-green-500 text-white text-lg font-semibold rounded-full 
+                 hover:bg-green-600 transform hover:scale-105 transition-all duration-300 
+                 shadow-lg hover:shadow-xl"
       >
         Generar nuevo descuento
       </button>

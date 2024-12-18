@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 
 export default function QRGenerator() {
   const [discount, setDiscount] = useState('10%');
@@ -17,7 +17,7 @@ export default function QRGenerator() {
   return (
     <div className="text-center">
       <div className="bg-white p-8 rounded-lg shadow-lg inline-block">
-        <QRCode 
+        <QRCodeSVG 
           value={qrValue}
           size={200}
           level="H"

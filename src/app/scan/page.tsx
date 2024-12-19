@@ -19,25 +19,35 @@ export default function ScanPage() {
   };
 
   return (
-    <main className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-center mb-8">Escanear Código QR</h1>
-      
-      <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-        <QRReader onResult={handleResult} onError={handleError} />
+    <div className="flex flex-col min-h-[calc(100vh-4rem)]">
+      <div className="flex-1 w-full max-w-lg mx-auto px-4 py-6">
+        <h1 className="text-xl sm:text-2xl font-bold text-center mb-6">
+          Escanear Código QR
+        </h1>
         
-        {result && (
-          <div className="mt-4 p-4 bg-green-100 rounded">
-            <h2 className="font-semibold text-green-800">Resultado:</h2>
-            <p className="text-green-700">{result}</p>
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="p-4 sm:p-6">
+            <QRReader onResult={handleResult} onError={handleError} />
           </div>
-        )}
-        
-        {error && (
-          <div className="mt-4 p-4 bg-red-100 rounded">
-            <p className="text-red-700">{error}</p>
-          </div>
-        )}
+          
+          {result && (
+            <div className="mt-4 mx-4 sm:mx-6 mb-4 p-4 bg-green-50 border border-green-200 rounded-md">
+              <h2 className="font-semibold text-green-800 mb-2">Cupón encontrado:</h2>
+              <p className="text-green-700 break-all">{result}</p>
+            </div>
+          )}
+          
+          {error && (
+            <div className="mt-4 mx-4 sm:mx-6 mb-4 p-4 bg-red-50 border border-red-200 rounded-md">
+              <p className="text-red-700">{error}</p>
+            </div>
+          )}
+        </div>
+
+        <p className="mt-6 text-center text-sm text-secondary-600">
+          Coloca el código QR dentro del marco para escanearlo automáticamente
+        </p>
       </div>
-    </main>
+    </div>
   );
 }

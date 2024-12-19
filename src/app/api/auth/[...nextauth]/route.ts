@@ -2,6 +2,20 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { storefrontClient } from '@/lib/shopify/client';
 
+interface CustomerAccessTokenCreateResponse {
+  customerAccessTokenCreate: {
+    customerAccessToken: {
+      accessToken: string;
+      expiresAt: string;
+    } | null;
+    customerUserErrors: {
+      code: string;
+      field: string[];
+      message: string;
+    }[];
+  };
+}
+
 const LOGIN_MUTATION = `
   mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
     customerAccessTokenCreate(input: $input) {
@@ -29,7 +43,7 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         try {
-          const { customerAccessTokenCreate } = await storefrontClient.request(LOGIN_MUTATION, {
+          const { customerAccessTokenCreate } = await storefrontClient.request<CustomerAccessTokenCreateResponse>(LOGIN_MUTATION, {
             input: {
               email: credentials?.email,
               password: credentials?.password,

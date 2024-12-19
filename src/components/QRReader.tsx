@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from 'html5-qrcode';
+import { Html5QrcodeScanner } from 'html5-qrcode';
 
 interface QRReaderProps {
   onResult: (result: string) => void;
@@ -25,11 +25,10 @@ const QRReader = ({ onResult, onError }: QRReaderProps) => {
         qrbox: qrBoxSize,
         fps: 10,
         aspectRatio: 1,
-        formatsToSupport: [
-          Html5QrcodeSupportedFormats.QR_CODE,
-          Html5QrcodeSupportedFormats.DATA_MATRIX,
-          Html5QrcodeSupportedFormats.AZTEC,
-        ],
+        supportedScanTypes: [2],
+        experimentalFeatures: {
+          useBarCodeDetectorIfSupported: true
+        },
         rememberLastUsedCamera: true,
         showTorchButtonIfSupported: true,
         defaultZoomValueIfSupported: 2,
@@ -44,15 +43,53 @@ const QRReader = ({ onResult, onError }: QRReaderProps) => {
     };
 
     const error = (err: string) => {
-      // Ignorar errores comunes de escaneo
-      if (onError && !err.includes('NotFound') && !err.includes('NoMultiFormat')) {
-        onError(err);
+      // Solo mostrar errores relevantes
+      if (onError && !err.includes('NotFound') && !err.includes('MultiFormat')) {
+        onError('Error al escanear el código. Por favor, inténtalo de nuevo.');
       }
     };
 
     if (!isScanning) {
       setIsScanning(true);
       scanner.render(success, error);
+
+      // Personalizar textos en español
+      setTimeout(() => {
+        const elements = document.querySelectorAll('#reader__dashboard_section_csr span');
+        elements.forEach(el => {
+          if (el.textContent?.includes('Request Camera Permissions')) {
+            el.textContent = 'Solicitar Permisos de Cámara';
+          }
+        });
+
+        const fileInput = document.querySelector('#reader__filescan_input') as HTMLInputElement;
+        if (fileInput) {
+          fileInput.title = 'Seleccionar archivo';
+        }
+
+        const select = document.querySelector('#reader__camera_selection') as HTMLSelectElement;
+        if (select) {
+          select.title = 'Seleccionar cámara';
+        }
+
+        const startButton = document.querySelector('#reader__dashboard_section_csr button');
+        if (startButton) {
+          startButton.textContent = 'Iniciar Escaneo';
+        }
+
+        const swapLink = document.querySelector('#reader__dashboard_section_swaplink');
+        if (swapLink) {
+          const buttons = swapLink.querySelectorAll('button');
+          buttons.forEach(button => {
+            if (button.textContent?.includes('File based')) {
+              button.textContent = 'Escanear desde archivo';
+            }
+            if (button.textContent?.includes('Camera based')) {
+              button.textContent = 'Usar cámara';
+            }
+          });
+        }
+      }, 100);
     }
 
     const handleResize = () => {

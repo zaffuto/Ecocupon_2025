@@ -32,6 +32,14 @@ interface Collection {
   };
 }
 
+interface CollectionsResponse {
+  collections: {
+    edges: Array<{
+      node: Collection;
+    }>;
+  };
+}
+
 const COLLECTIONS_QUERY = `
   query Collections {
     collections(first: 10) {
@@ -75,8 +83,8 @@ export default function ProductsPage() {
   useEffect(() => {
     const fetchCollections = async () => {
       try {
-        const data = await storefrontClient.request(COLLECTIONS_QUERY);
-        const collections = data.collections.edges.map((edge: any) => edge.node);
+        const data = await storefrontClient.request<CollectionsResponse>(COLLECTIONS_QUERY);
+        const collections = data.collections.edges.map(edge => edge.node);
         setCollections(collections);
         if (collections.length > 0) {
           setSelectedCollection(collections[0].id);

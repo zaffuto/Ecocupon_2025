@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { Html5QrcodeScanner } from 'html5-qrcode';
+import { Html5QrcodeScanner, Html5QrcodeScanType } from 'html5-qrcode';
 
 interface QRReaderProps {
   onResult: (result: string) => void;
@@ -25,7 +25,7 @@ const QRReader = ({ onResult, onError }: QRReaderProps) => {
         qrbox: qrBoxSize,
         fps: 10,
         aspectRatio: 1,
-        supportedScanTypes: [2],
+        supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
         experimentalFeatures: {
           useBarCodeDetectorIfSupported: true
         },

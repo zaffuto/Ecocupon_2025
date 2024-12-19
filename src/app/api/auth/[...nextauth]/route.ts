@@ -18,7 +18,7 @@ const LOGIN_MUTATION = `
   }
 `;
 
-export const authOptions = {
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       id: 'shopify',
@@ -68,7 +68,6 @@ export const authOptions = {
       return session;
     },
   },
-};
+});
 
-const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

@@ -3,16 +3,64 @@
 @tailwind utilities;
 
 :root {
-  --primary: #059669;
-  --primary-light: #10b981;
-  --primary-dark: #047857;
+  --primary: #16a34a;
+  --primary-light: #22c55e;
+  --primary-dark: #15803d;
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    @apply antialiased text-secondary-800;
+  }
+
+  h1 {
+    @apply text-4xl font-bold text-secondary-900;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold text-secondary-900;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold text-secondary-900;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-100 text-secondary-700 hover:bg-secondary-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary-500;
+  }
+
+  .input {
+    @apply block w-full rounded-md border-secondary-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
+  }
 }
 
 /* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -21,59 +69,39 @@
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
-/* Custom Styles */
-.hero-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary-dark) 100%);
-}
-
-/* Card Hover Effects */
-.group:hover .group-hover\:-translate-y-2 {
-  transform: translateY(-0.5rem);
-}
-
-.group:hover .group-hover\:shadow-2xl {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-}
-
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -0.025em;
-}
-
-/* Button Styles */
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.5);
-}
-
-/* QR Code Container */
-.qr-container {
-  perspective: 1000px;
-}
-
-.qr-container:hover {
-  transform: scale(1.02) rotateY(2deg);
-  transition: all 0.3s ease;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 3rem;
-  }
-  h2 {
-    font-size: 2.5rem;
-  }
+/* Mobile Optimizations */
+@media (max-width: 640px) {
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    @apply px-4;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+}
+
+/* Improved Touch Targets for Mobile */
+@media (max-width: 640px) {
+  button, 
+  .btn,
+  a {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  input,
+  select,
+  textarea {
+    @apply text-base; /* Larger font size for better touch */
   }
 }

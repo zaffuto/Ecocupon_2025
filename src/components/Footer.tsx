@@ -1,48 +1,23 @@
 export default function Footer() {
   return (
-    <footer className="bg-white shadow-sm mt-auto">
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">EcoCupón</h3>
-            <p className="text-gray-600">
-              Transformando el reciclaje en recompensas para un futuro más sostenible.
-            </p>
+    <footer className="bg-white shadow-md mt-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center">
+          <div className="text-center sm:text-left mb-4 sm:mb-0">
+            <h3 className="text-lg font-semibold text-primary-600">EcoCupon</h3>
+            <p className="text-sm text-secondary-500">Cuidando el planeta, un cupón a la vez</p>
           </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Enlaces</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/about" className="text-gray-600 hover:text-emerald-600">
-                  Sobre Nosotros
-                </a>
-              </li>
-              <li>
-                <a href="/contact" className="text-gray-600 hover:text-emerald-600">
-                  Contacto
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Legal</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="/privacy" className="text-gray-600 hover:text-emerald-600">
-                  Política de Privacidad
-                </a>
-              </li>
-              <li>
-                <a href="/terms" className="text-gray-600 hover:text-emerald-600">
-                  Términos y Condiciones
-                </a>
-              </li>
-            </ul>
+          
+          <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-sm text-secondary-500">
+            <a href="#" className="hover:text-primary-600 transition-colors">Términos y Condiciones</a>
+            <a href="#" className="hover:text-primary-600 transition-colors">Política de Privacidad</a>
+            <a href="#" className="hover:text-primary-600 transition-colors">Contacto</a>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <p className="text-center text-gray-500">
-            © {new Date().getFullYear()} EcoCupón. Todos los derechos reservados.
+        
+        <div className="mt-6 pt-6 border-t border-secondary-100">
+          <p className="text-center text-sm text-secondary-400">
+            {new Date().getFullYear()} EcoCupon. Todos los derechos reservados.
           </p>
         </div>
       </div>

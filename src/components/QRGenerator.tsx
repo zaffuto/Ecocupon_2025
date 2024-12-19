@@ -15,33 +15,35 @@ export default function QRGenerator() {
   };
 
   return (
-    <div className="text-center animate-fade-in">
-      <div className="qr-container inline-block">
-        <div className="mb-6">
+    <div className="flex flex-col items-center justify-center">
+      <div className="bg-white p-12 rounded-3xl shadow-2xl max-w-md w-full mx-auto
+                    transform transition-all duration-300 hover:shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]">
+        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 p-8 rounded-2xl mb-8">
           <QRCodeSVG 
             value={qrValue}
-            size={250}
+            size={300}
             level="H"
             includeMargin
-            className="mx-auto shadow-lg rounded-lg"
+            className="mx-auto"
           />
         </div>
-        <div className="space-y-3">
-          <p className="text-2xl font-bold text-green-600">
-            Descuento actual: {discount}
+        <div className="text-center space-y-4">
+          <p className="text-3xl font-bold text-emerald-600">
+            {discount} de Descuento
           </p>
           <p className="text-gray-600">
-            Escanea para recibir tu descuento en WhatsApp
+            Escanea el código QR para recibir tu descuento por WhatsApp
           </p>
         </div>
       </div>
+      
       <button
         onClick={generateNewQR}
-        className="mt-8 px-8 py-4 bg-green-500 text-white text-lg font-semibold rounded-full 
-                 hover:bg-green-600 transform hover:scale-105 transition-all duration-300 
-                 shadow-lg hover:shadow-xl"
+        className="mt-12 px-10 py-5 bg-emerald-600 text-white text-xl font-bold rounded-xl
+                 hover:bg-emerald-700 transform hover:scale-105 transition-all duration-300
+                 shadow-lg hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-emerald-500 focus:ring-opacity-50"
       >
-        Generar nuevo descuento
+        Generar Nuevo Descuento
       </button>
     </div>
   );

@@ -14,11 +14,12 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <Image
-                src="/logo.png"
+                src="/logo.svg"
                 alt="EcoCupon Logo"
-                width={40}
-                height={40}
-                className="w-auto h-8"
+                width={32}
+                height={32}
+                className="w-8 h-8"
+                priority
               />
               <span className="ml-2 text-xl font-semibold text-primary-600">
                 EcoCupon
